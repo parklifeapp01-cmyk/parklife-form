@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ParkLife Evaluation Form</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  line-height: 1.5;
+}
+h1, h2 {
+  color: #2a4b7c;
+}
+label {
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+}
+input, select, textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+button {
+  background-color: #2a4b7c;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: #1c3657;
+}
+</style>
+
+</head>
+<body>
+
+<h1>ParkLife – Clinical & Patient Usability Evaluation</h1>
+<p>Thank you for participating in the evaluation of ParkLife. 
+This questionnaire is intended for clinicians, therapists, researchers and Parkinson's disease advocates.</p>
+
+<form id="evaluationForm">
+
+<!-- SECTION 1 -->
+<h2>SECTION 1 — About You</h2>
+
+<label>Your role:</label>
+<select name="role" required>
+  <option value="" disabled selected>Select</option>
+  <option>Neurologist</option>
+  <option>Movement Disorder Specialist</option>
+  <option>Physiotherapist / Rehabilitation Expert</option>
+  <option>Parkinson’s Nurse</option>
+  <option>Occupational Therapist</option>
+  <option>Digital Health Researcher</option>
+  <option>Patient Advocate</option>
+  <option>Other</option>
+</select>
+
+<label>Country of practice:</label>
+<input type="text" name="country" required>
+
+<label>Years of experience with PD patients:</label>
+<select name="experience" required>
+  <option value="" disabled selected>Select</option>
+  <option>0–5</option>
+  <option>6–10</option>
+  <option>11–20</option>
+  <option>20+</option>
+</select>
+
+<!-- SECTION 2 -->
+<h2>SECTION 2 — Usability & Interface</h2>
+
+<label>Overall usability (1–5):</label>
+<input type="number" name="usability_overall" min="1" max="5">
+
+<label>Ease of navigation for PD patients (1–5):</label>
+<input type="number" name="navigation" min="1" max="5">
+
+<label>Clarity of instructions (1–5):</label>
+<input type="number" name="clarity" min="1" max="5">
+
+<label>Comments:</label>
+<textarea name="ui_comments"></textarea>
+
+<!-- SECTION 3 -->
+<h2>SECTION 3 — Clinical Relevance</h2>
+
+<label>Relevance of symptom tracking (1–5):</label>
+<input type="number" name="symptom_tracking" min="1" max="5">
+
+<label>Usefulness of ON/OFF journal:</label>
+<input type="text" name="on_off_journal">
+
+<label>Usefulness of daily exercise logging (1–5):</label>
+<input type="number" name="exercise_logging" min="1" max="5">
+
+<label>Supports clinician–patient communication:</label>
+<input type="text" name="communication">
+
+<label>Comments:</label>
+<textarea name="clinical_comments"></textarea>
+
+<!-- SECTION 4 -->
+<h2>SECTION 4 — Patient Impact</h2>
+
+<label>Improves exercise adherence (1–5):</label>
+<input type="number" name="adherence" min="1" max="5">
+
+<label>Helps patients understand their condition (1–5):</label>
+<input type="number" name="understanding" min="1" max="5">
+
+<label>Reduces symptom fluctuations:</label>
+<input type="text" name="fluctuations">
+
+<label>Would recommend to patients/colleagues:</label>
+<input type="text" name="recommend">
+
+<!-- SECTION 5 -->
+<h2>SECTION 5 — Suggestions</h2>
+
+<label>Top 3 improvements:</label>
+<textarea name="improvements"></textarea>
+
+<label>Future features:</label>
+<textarea name="future_features"></textarea>
+
+<label>Additional comments:</label>
+<textarea name="comments"></textarea>
+
+<button type="submit">Submit</button>
+
+</form>
+
+<script>
+document.getElementById("evaluationForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    fetch("https://script.google.com/macros/s/AKfycbwMte2xRnWh9WK3GcUSRSdsNXixa43Qnqh5Cy3uYE6rQs_w-yybG617IKWhYGyc95s-ew/exec", {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify(data)
+    })
+    .then(() => {
+        alert("Thank you! Your response has been submitted.");
+        form.reset();
+    })
+    .catch(err => alert("Error submitting form."));
+});
+</script>
+
+</body>
+</html>
